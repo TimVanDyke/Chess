@@ -20,6 +20,7 @@ public class Gui extends JFrame {
 	private String title = "Chess!";
 	private JPanel contentPane;
 	private Canvas canvas;
+	private int num;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
