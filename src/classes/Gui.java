@@ -61,7 +61,7 @@ public class Gui extends JFrame {
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		g.setColor(Color.orange);
-		g.drawLine(0, 0, width-1, height-1);
+		g.drawLine(1, 0, width-1, height-1);
 		
 		g.dispose();
 		bs.show();
