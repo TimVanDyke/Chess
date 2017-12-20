@@ -19,17 +19,16 @@ public class Gui extends JFrame {
 	public static int height = 640;
 	private String title = "Chess!";
 	private Canvas canvas;
-	private int num;
 	private boolean running = false;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
 	public Gui() {
-		//Create Window
+		//Create Window (JFrame)
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle(title);
-		setSize(800, 640);
+		setSize(width, height);
 		setLocationRelativeTo(null);		
 		
 		//Put Stuff in the Window
@@ -41,36 +40,48 @@ public class Gui extends JFrame {
 		
 	}
 	
+	// Launcher
 	public void start() {
 		running = true;
 		requestFocus();
 		run();
 	}
 	
+	// Update All Objects
+	public void update() {
+		
+	}
+	
+	//Render the Image to the Canvas
 	public void render() {
+		// If no BufferStrategy exists, make it a 3 length buffer
 		BufferStrategy bs = canvas.getBufferStrategy();
 		if (bs == null) {
 			canvas.createBufferStrategy(3);
 			return;
 		}
 		
+		//Clear the screen to all black
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0;
 		}
 		
+		// Draw Graphics
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		g.setColor(Color.orange);
 		g.drawLine(1, 0, width-1, height-1);
 		
+		// Dispose Graphics
 		g.dispose();
+		//Show BufferedImage
 		bs.show();
-		
-		
 	}
 	
+	// Main Program Loop
 	public void run() {
-		while (true){
+		while (running){
+			update();
 			render();
 		}
 	}
