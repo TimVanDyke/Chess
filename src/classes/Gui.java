@@ -18,9 +18,9 @@ public class Gui extends JFrame {
 	public static int width = 800;
 	public static int height = 640;
 	private String title = "Chess!";
-	private JPanel contentPane;
 	private Canvas canvas;
 	private int num;
+	private boolean running = false;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
@@ -33,16 +33,18 @@ public class Gui extends JFrame {
 		setLocationRelativeTo(null);		
 		
 		//Put Stuff in the Window
-		//Master JPanel
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5,5,5,5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
-		contentPane.add(canvas);
+		add(canvas);
+		pack();
 		setVisible(true);
 		
+	}
+	
+	public void start() {
+		running = true;
+		requestFocus();
+		run();
 	}
 	
 	public void render() {
@@ -75,7 +77,7 @@ public class Gui extends JFrame {
 	
 	public static void main(String[] args) {
 		Gui frame = new Gui();
-			
+		frame.start();
 	}
 
 }
