@@ -23,6 +23,8 @@ public class Gui extends JFrame {
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
+	private Main main;
+	
 	public Gui() {
 		//Create Window (JFrame)
 		setResizable(false);
@@ -38,6 +40,8 @@ public class Gui extends JFrame {
 		pack();
 		setVisible(true);
 		
+		main = new Main();
+		
 	}
 	
 	// Launcher
@@ -49,7 +53,7 @@ public class Gui extends JFrame {
 	
 	// Update All Objects
 	public void update() {
-		
+		main.update();
 	}
 	
 	//Render the Image to the Canvas
@@ -60,11 +64,13 @@ public class Gui extends JFrame {
 			canvas.createBufferStrategy(3);
 			return;
 		}
-		
 		//Clear the screen to all black
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0;
 		}
+		
+		//Set pixels
+		main.render(pixels);
 		
 		// Draw Graphics
 		Graphics g = bs.getDrawGraphics();
