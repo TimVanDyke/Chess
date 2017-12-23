@@ -39,8 +39,7 @@ public class Gui extends JFrame {
 		add(canvas);
 		pack();
 		setVisible(true);
-		
-		main = new Main();
+		main = new Main(width, height);
 		
 	}
 	
@@ -96,5 +95,4 @@ public class Gui extends JFrame {
 		Gui frame = new Gui();
 		frame.start();
 	}
-
 }

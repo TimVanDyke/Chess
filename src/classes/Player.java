@@ -16,6 +16,10 @@ public class Player {
 		return pieces;
 	}
 	
+	public int getColor() {
+		return color;
+	}
+	
 	public void endTurn() {
 		turn = false;
 	}

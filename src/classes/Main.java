@@ -2,11 +2,15 @@ package classes;
 
 public class Main {
 	
-	private int width = 2, height = 2;
+	private int width, height;
+	private int size = 2;
 	private Board board;
+	private Screen screen;
 	private Player p1, p2;
-	public Main() {
-		board = new Board(width, height);
+	public Main(int width, int height) {
+		screen = new Screen(width, height);
+		screen.
+		board = new Board(size, size);
 	}
 	
 	public void update() {
@@ -15,6 +19,8 @@ public class Main {
 	}
 	
 	public void render(int[] pixels) {
-		//board.render(int[] pixels);
+		for(int i = 0; i < pixels.length; i++) {
+			pixels[i] = screen.getPixels()[i];
+		}
 	}
 }
