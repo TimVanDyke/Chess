@@ -9,7 +9,6 @@ public class Main {
 	private Player p1, p2;
 	public Main(int width, int height) {
 		screen = new Screen(width, height);
-		screen.
 		board = new Board(size, size);
 	}
 	
