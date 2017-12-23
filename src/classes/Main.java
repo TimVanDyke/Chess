@@ -8,7 +8,9 @@ public class Main {
 	private Screen screen;
 	private Player p1, p2;
 	private Player turn;
+	private Location mouse;
 	private Piece tp, jp;
+	private boolean pieceChosen = false;
 	public Main(int width, int height) {
 		screen = new Screen(width, height);
 		board = new Board(size, size);
@@ -20,17 +22,33 @@ public class Main {
 		jp = new Piece(1, new Location(5, 5), board, p2, "res/redPiece.png");
 		
 		turn = p1;
+		mouse = new Location(-1, -1);
 	}
 	
 	public void update() {
-		//Listen for mouse click
-		//Get piece under mouse
-		//Check if the piece can be moved by the current player
-		//show possible places to move it
-		//Listen for mouse click
-		//If legal move, move piece there, else set current piece to null
+		mouse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
+		if (!pieceChosen) {
+			//Listen for mouse click
+			if (Mouse.getB() == 0) {
+				//Get piece under mouse
+				Piece[] pieces = turn.getPieces();
+				for(int i = 0; i < pieces.length; i++) {
+					Piece p = pieces[i];
+					Location loc = p.getLoc();
+					if (loc.equals(mouse)) {
+						//show possible places to move it
+						Location[] locs = p.getRange();
+						for(int q = 0; q < locs.length; q++) {
+							if (p.legalMove(locs[q])) {
+								//board.highlight(locs[q]);
+							}
+						}
+					}
+				}
+			}
+		} else {
 		
-		
+		}
 	}
 	
 	public void render(int[] pixels) {
