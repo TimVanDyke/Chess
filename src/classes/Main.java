@@ -19,7 +19,7 @@ public class Main {
 		p2 = new Player("Jason");
 		jp = new Piece(1, new Location(5, 5), board, p2, "res/redPiece.png");
 		
-		p1.startTurn();
+		turn = p1;
 	}
 	
 	public void update() {
@@ -35,7 +35,6 @@ public class Main {
 	
 	public void render(int[] pixels) {
 		board.render(screen);
-		board.piece.render(screen);
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.getPixels()[i];
 		}

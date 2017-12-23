@@ -4,18 +4,15 @@ public class Player {
 	
 	private int color;
 	private int maxPieces = 16;
-	private boolean turn;
 	private String name;
 	private Piece[] pieces;
 	
 	public Player(int color) {
-		turn = false;
 		pieces = new Piece[maxPieces];
 		name = "PlayerZero";
 	}
 	
 	public Player(String name) {
-		turn = false;
 		pieces = new Piece[maxPieces];
 		this.name  = name;
 	}
@@ -31,14 +28,6 @@ public class Player {
 	
 	public int getColor() {
 		return color;
-	}
-	
-	public void endTurn() {
-		turn = false;
-	}
-	
-	public void startTurn() {
-		turn = true;
 	}
 	
 	public void setName(String name) {
