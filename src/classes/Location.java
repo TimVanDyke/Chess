@@ -29,6 +29,11 @@ public class Location {
 		this.y = newY;
 	}
 	
+	public void setLoc(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	public void setLoc(Location loc) {
 		x = loc.getX();
 		y = loc.getY();
