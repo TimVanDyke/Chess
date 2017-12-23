@@ -3,14 +3,16 @@ package classes;
 public class Piece {
 	//Class variables
 	private Location currentLoc; //the x y coordinates of a piece
-	private int move; //movement range
+	private int move, bWidth, bHeight; //movement range
 	
 	/*
 	 * the constructor
 	 */
-	public Piece() {	
-		move = 1;
-		currentLoc = new Location();
+	public Piece(int move, Location loc, int bLength, int bHeight) {	
+		this.move = move;
+		currentLoc = loc;
+		this.bWidth = bWidth;
+		this.bHeight = bHeight;
 	}
 	
 	/*
@@ -56,7 +58,7 @@ public class Piece {
 	public boolean legalMove(Location newLoc) {
 		Location[] legalMoves = getRange();
 		for (int i = 0; i < 4; i++) {
-			if (legalMoves[i].getX() == newLoc.getX() && legalMoves[i].getY() == newLoc.getY()) {
+			if (legalMoves[i].getX() == newLoc.getX() && legalMoves[i].getY() == newLoc.getY() && newLoc.getX() >= 0 && newLoc.getY() >= 0 && newLoc.getX() < bWidth && newLoc.getY() < bHeight) {
 				return true;
 			}
 		}
@@ -70,12 +72,13 @@ public class Piece {
 	public boolean legalMove(int x, int y) {
 		Location[] legalMoves = getRange();
 		for (int i = 0; i < 4; i++) {
-			if (legalMoves[i].getX() == x && legalMoves[i].getY() == y) {
+			if (legalMoves[i].getX() == x && legalMoves[i].getY() == y && x >= 0 && y >= 0 && x < bWidth && y < bHeight) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
 	/*
 	 * changes the pieces location
 	 * @param newLoc the new location
@@ -86,6 +89,7 @@ public class Piece {
 		else
 			System.out.print("You have seriously messed up your error catching on this one Tim");
 	}
+	
 	/*
 	 * changes the pieces location
 	 * @param x the new x
@@ -97,5 +101,9 @@ public class Piece {
 			currentLoc.setX(x);
 		} else
 			System.out.print("You have seriously messed up your error catching on this one Tim");
+	}
+	
+	public void renderSelf() {
+		
 	}
 }

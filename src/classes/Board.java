@@ -35,4 +35,8 @@ public class Board {
 		return isFull;
 	}
 	
+	public void renderBoard() {
+		
+	}
+	
 } 

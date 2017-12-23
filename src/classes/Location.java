@@ -2,10 +2,11 @@ package classes;
 
 public class Location {
 	private int x, y;
+	private Location myLoc = new Location (x, y);
 	
-	public Location() {
-		x = -1;
-		y = -1;
+	public Location(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public int getX() {
@@ -16,6 +17,11 @@ public class Location {
 		return y;
 	}
 	
+	public Location getLoc() {
+		Location rLoc = new Location (x, y);
+		return rLoc;
+	}
+	
 	public void setX(int newX) {
 		this.x = newX;
 	}
@@ -23,6 +29,7 @@ public class Location {
 	public void setY(int newY) {
 		this.y = newY;
 	}
+	
 	public void setLoc(Location loc) {
 		x = loc.getX();
 		y = loc.getY();
