@@ -3,16 +3,22 @@ package classes;
 public class Piece {
 	//Class variables
 	private Location currentLoc; //the x y coordinates of a piece
-	private int move, bWidth, bHeight; //movement range
+	private int move, bWidth, bHeight, size, color; //all the ints
+	private Player owner;
+	private Boolean isAlive;
 	
 	/*
 	 * the constructor
 	 */
-	public Piece(int move, Location loc, int bLength, int bHeight) {	
+	public Piece(int move, Location loc, int bLength, int bHeight, int size, Player owner) {	
 		this.move = move;
 		currentLoc = loc;
 		this.bWidth = bWidth;
 		this.bHeight = bHeight;
+		this.size = size;
+		this.owner = owner;
+		color = owner.getColor();
+		isAlive = true;
 	}
 	
 	/*
@@ -101,6 +107,13 @@ public class Piece {
 			currentLoc.setX(x);
 		} else
 			System.out.print("You have seriously messed up your error catching on this one Tim");
+	}
+	
+	/*
+	 * tells the piece to kill itself when it dies. This is to be called by the board
+	 */
+	public void suicide() {
+		isAlive = false;
 	}
 	
 	public void renderSelf() {
