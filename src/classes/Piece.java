@@ -7,20 +7,21 @@ public class Piece {
 	private Player owner;
 	private Boolean isAlive;
 	private Sprite sprite;
-	
+	private Board board;
 	/*
 	 * the constructor
 	 */
-	public Piece(int move, Location loc, int bWidth, int bHeight, int size, Player owner, String path) {	
+	public Piece(int move, Location loc, Board board, Player owner, String path) {	
 		this.move = move;
 		currentLoc = loc;
-		this.bWidth = bWidth;
-		this.bHeight = bHeight;
-		this.size = size;
+		this.board = board;
+		bWidth = board.getWidth();
+		bHeight = board.getHeight();
 		this.owner = owner;
 		color = owner.getColor();
 		isAlive = true;
 		sprite = new Sprite(path);
+		size = 48;
 	}
 	
 	/*
@@ -92,8 +93,11 @@ public class Piece {
 	 * @param newLoc the new location
 	 */
 	public void move(Location newLoc) {
-		if (legalMove(newLoc))
+		if (legalMove(newLoc)) {
+			board.setEmpty(currentLoc);
+			board.setFull(newLoc);
 			currentLoc.setLoc(newLoc);
+		}
 		else
 			System.out.print("You have seriously messed up your error catching on this one Tim");
 	}
@@ -105,8 +109,10 @@ public class Piece {
 	 */
 	public void move(int x, int y) {
 		if (legalMove(x, y)) {
+			board.setEmpty(currentLoc.getX(), currentLoc.getY());
+			board.setFull(x, y);
 			currentLoc.setX(x);
-			currentLoc.setX(x);
+			currentLoc.setY(y);
 		} else
 			System.out.print("You have seriously messed up your error catching on this one Tim");
 	}

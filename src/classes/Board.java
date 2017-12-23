@@ -17,7 +17,11 @@ public class Board {
 		this.width = width - 1;
 		board = new int[width][height];
 		sprite = new Sprite("res/checkerboard.png");
-		piece = new Piece(1, new Location(0, 1), width, height, 48, new Player(0), "res/bluePiece.png");
+		for (int x = 0; x < this.width; x++) {
+			for (int y = 0; y < this.height; y ++) {
+				board[x][y] = 0;
+			}
+		}
 	}
 	
 	public int getHeight() {
@@ -38,13 +42,42 @@ public class Board {
 		return isFull;
 	}
 	
+	public boolean isFull(Location loc) {
+		boolean isFull;
+		int x = loc.getX();
+		int y = loc.getY();
+		if (board[x][y] != 0) {
+			isFull = true;
+		} else {
+			isFull = false;
+		}
+		return isFull;
+	}
+	
+	public void setFull(Location loc) {
+		int x = loc.getX(), y = loc.getY();
+		board[x][y] = 1;
+	}
+	
+	public void setFull(int x, int y) {
+		board[x][y] = 1;
+	}
+	
+	public void setEmpty(Location loc) {
+		int x = loc.getX(), y = loc.getY();
+		board[x][y] = 0;
+	}
+	
+	public void setEmpty(int x, int y) {
+		board[x][y] = 0;
+	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
 	
 	public void render(Screen screen) {
 		screen.renderBoard(this);
-		piece.render(screen);
 	}
 	
 } 
