@@ -21,19 +21,22 @@ public class Screen {
 	}
 	
 	public void renderPiece(Piece piece) {
+		
 		Sprite sp = piece.getSprite();
 		Location loc = piece.getLoc();
 		int yOffset = sp.getHeight()/2;
-		int xOffset = sp.getWidth()/2;
-		for (int y = loc.getY() - yOffset; y < sp.getHeight(); y++) {
-			for (int x = loc.getX() - xOffset; x < sp.getWidth(); x++) {
-				pixels[x + y * width] = sp.getPixels()[x + y * sp.getWidth()];
+		int xOffset = sp.getHeight()/2;
+		for (int y = 0; y < sp.getHeight(); y++) {
+			int yp = y + loc.getY();
+			for (int x = 0; x < sp.getWidth(); x++) {
+				int xp = x + loc.getX();
+				pixels[xp + yp * width] = sp.getPixels()[x + y * sp.getWidth()];
 			}
 		}
 	}
 	
 	public void clear() {
-		for(int i = 0; i < pixels.length; i++) pixels[i] = 0x5500FF;
+		for(int i = 0; i < pixels.length; i++) pixels[i] = 0xAAAAAA;
 	}
 	
 	public int[] getPixels() {

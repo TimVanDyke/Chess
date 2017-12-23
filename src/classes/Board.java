@@ -5,7 +5,7 @@ public class Board {
 	private int height;
 	private int width;
 	private Sprite sprite;
-	private Piece piece;
+	public Piece piece;
 	
 	/*
 	 * the constructor
@@ -17,7 +17,7 @@ public class Board {
 		this.width = width - 1;
 		board = new int[width][height];
 		sprite = new Sprite("res/checkerboard.png");
-		piece = new Piece(1, new Location(100, 100), width, height, 48, new Player(0), "res/bluePiece.png");
+		piece = new Piece(1, new Location(4, 4), width, height, 48, new Player(0), "res/bluePiece.png");
 	}
 	
 	public int getHeight() {
