@@ -17,7 +17,7 @@ public class Board {
 		this.width = width - 1;
 		board = new int[width][height];
 		sprite = new Sprite("res/checkerboard.png");
-		piece = new Piece(1, new Location(4, 4), width, height, 48, new Player(0), "res/bluePiece.png");
+		piece = new Piece(1, new Location(32+64, 32), width, height, 48, new Player(0), "res/bluePiece.png");
 	}
 	
 	public int getHeight() {

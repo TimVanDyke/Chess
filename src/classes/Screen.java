@@ -27,9 +27,9 @@ public class Screen {
 		int yOffset = sp.getHeight()/2;
 		int xOffset = sp.getHeight()/2;
 		for (int y = 0; y < sp.getHeight(); y++) {
-			int yp = y + loc.getY();
+			int yp = y + loc.getY() - yOffset;
 			for (int x = 0; x < sp.getWidth(); x++) {
-				int xp = x + loc.getX();
+				int xp = x + loc.getX() - xOffset;
 				pixels[xp + yp * width] = sp.getPixels()[x + y * sp.getWidth()];
 			}
 		}
