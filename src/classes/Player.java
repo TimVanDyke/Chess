@@ -16,6 +16,11 @@ public class Player {
 		return pieces;
 	}
 	
+	public void setColor(int color) {
+		//Set color to either 0x0 (Black) or 0xFFFFFF (White)
+		this.color = color;
+	}
+	
 	public int getColor() {
 		return color;
 	}

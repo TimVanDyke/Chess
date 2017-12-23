@@ -20,17 +20,16 @@ public class Screen {
 	}
 	
 	public void renderPiece(Piece piece) {
-		int xp = piece.getX();
-		int yp = piece.getY();
-		for (int y = yp; y < piece.getHeight(); y++) {
-			for (int x = xp; x < piece.getWidth(); x++) {
+		Location loc = piece.getLoc();
+		for (int y = loc.getX(); y < piece.getSize(); y++) {
+			for (int x = loc.getY(); x < piece.getSize(); x++) {
 				pixels[x + y * width] = piece.getColor();
 			}
 		}
 	}
 	
 	public void clear() {
-		for(int i = 0; i < pixels.length; i++) pixels[i] = 0;
+		for(int i = 0; i < pixels.length; i++) pixels[i] = 0x5500FF;
 	}
 	
 	public int[] getPixels() {
