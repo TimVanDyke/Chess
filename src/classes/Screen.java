@@ -21,10 +21,13 @@ public class Screen {
 	}
 	
 	public void renderPiece(Piece piece) {
+		Sprite sp = piece.getSprite();
 		Location loc = piece.getLoc();
-		for (int y = loc.getX(); y < piece.getSize(); y++) {
-			for (int x = loc.getY(); x < piece.getSize(); x++) {
-				pixels[x + y * width] = piece.getSprite().getPixels()[i];
+		int yOffset = sp.getHeight()/2;
+		int xOffset = sp.getWidth()/2;
+		for (int y = loc.getY() - yOffset; y < sp.getHeight(); y++) {
+			for (int x = loc.getX() - xOffset; x < sp.getWidth(); x++) {
+				pixels[x + y * width] = sp.getPixels()[x + y * sp.getWidth()];
 			}
 		}
 	}
