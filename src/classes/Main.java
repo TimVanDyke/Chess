@@ -2,7 +2,7 @@ package classes;
 
 public class Main {
 	
-	private int width, height;
+	private int width = 2, height = 2;
 	private Board board;
 	private Player p1, p2;
 	public Main() {
