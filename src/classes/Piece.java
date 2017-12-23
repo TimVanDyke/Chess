@@ -11,7 +11,7 @@ public class Piece {
 	/*
 	 * the constructor
 	 */
-	public Piece(int move, Location loc, int bLength, int bHeight, int size, Player owner, String path) {	
+	public Piece(int move, Location loc, int bWidth, int bHeight, int size, Player owner, String path) {	
 		this.move = move;
 		currentLoc = loc;
 		this.bWidth = bWidth;
@@ -120,6 +120,10 @@ public class Piece {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public int getSize() {
+		return size;
 	}
 	
 	public void render(Screen screen) {

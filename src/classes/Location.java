@@ -2,7 +2,6 @@ package classes;
 
 public class Location {
 	private int x, y;
-	private Location myLoc = new Location (x, y);
 	
 	public Location(int x, int y) {
 		this.x = x;
