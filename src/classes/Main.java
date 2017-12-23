@@ -18,6 +18,7 @@ public class Main {
 	}
 	
 	public void render(int[] pixels) {
+		board.render(screen);
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.getPixels()[i];
 		}

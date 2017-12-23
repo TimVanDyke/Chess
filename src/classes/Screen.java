@@ -12,9 +12,10 @@ public class Screen {
 	}
 	
 	public void renderBoard(Board board) {
-		for (int y = 0; y < board.getHeight(); y++) {
-			for (int x = 0; x < board.getWidth(); x++) {
-				pixels[x + y * width] = board.getPixels[i];
+		Sprite sp = board.getSprite();
+		for (int y = 0; y < sp.getHeight(); y++) {
+			for (int x = 0; x < sp.getWidth(); x++) {
+				pixels[x + y * width] = sp.getPixels()[x + y * sp.getWidth()];
 			}
 		}
 	}
@@ -23,7 +24,7 @@ public class Screen {
 		Location loc = piece.getLoc();
 		for (int y = loc.getX(); y < piece.getSize(); y++) {
 			for (int x = loc.getY(); x < piece.getSize(); x++) {
-				pixels[x + y * width] = piece.getColor();
+				pixels[x + y * width] = piece.getSprite().getPixels()[i];
 			}
 		}
 	}

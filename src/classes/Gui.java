@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	public static int width = 800;
+	public static int width = 640;
 	public static int height = 640;
 	private String title = "Chess!";
 	private Canvas canvas;
@@ -74,8 +74,6 @@ public class Gui extends JFrame {
 		// Draw Graphics
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		g.setColor(Color.orange);
-		g.drawLine(1, 0, width-1, height-1);
 		
 		// Dispose Graphics
 		g.dispose();

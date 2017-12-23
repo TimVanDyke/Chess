@@ -4,6 +4,7 @@ public class Board {
 	private int board[][]; //the board
 	private int height;
 	private int width;
+	private Sprite sprite;
 	
 	
 	/*
@@ -15,6 +16,7 @@ public class Board {
 		this.height = height - 1; 
 		this.width = width - 1;
 		board = new int[width][height];
+		sprite = new Sprite("res/checkerboard.png");
 	}
 	
 	public int getHeight() {
@@ -35,8 +37,12 @@ public class Board {
 		return isFull;
 	}
 	
-	public void renderBoard() {
-		
+	public Sprite getSprite() {
+		return sprite;
+	}
+	
+	public void render(Screen screen) {
+		screen.renderBoard(this);
 	}
 	
 } 
