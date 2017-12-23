@@ -38,4 +38,11 @@ public class Location {
 		x = loc.getX();
 		y = loc.getY();
 	}
+	
+	public boolean equals(Location loc) {
+		if( this.x == loc.getX() && this.y == loc.getY())
+			return true;
+		else
+			return false;
+	}
 }
