@@ -6,11 +6,12 @@ public class Piece {
 	private int move, bWidth, bHeight, size, color; //all the ints
 	private Player owner;
 	private Boolean isAlive;
+	private Sprite sprite;
 	
 	/*
 	 * the constructor
 	 */
-	public Piece(int move, Location loc, int bLength, int bHeight, int size, Player owner) {	
+	public Piece(int move, Location loc, int bLength, int bHeight, int size, Player owner, String path) {	
 		this.move = move;
 		currentLoc = loc;
 		this.bWidth = bWidth;
@@ -19,6 +20,7 @@ public class Piece {
 		this.owner = owner;
 		color = owner.getColor();
 		isAlive = true;
+		sprite = new Sprite(path);
 	}
 	
 	/*
@@ -116,7 +118,11 @@ public class Piece {
 		isAlive = false;
 	}
 	
-	public void renderSelf() {
-		
+	public Sprite getSprite() {
+		return sprite;
+	}
+	
+	public void render(Screen screen) {
+		screen.renderPiece(this);
 	}
 }
