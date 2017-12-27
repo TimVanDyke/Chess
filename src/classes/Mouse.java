@@ -36,6 +36,7 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		x = e.getX();
 		y = e.getY();
 		b = e.getButton();
+		System.out.println(b);
 	}
 
 	@Override

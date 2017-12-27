@@ -19,6 +19,7 @@ public class Gui extends JFrame {
 	public static int height = 640;
 	private String title = "Chess!";
 	private Canvas canvas;
+	private Mouse mouse;
 	private boolean running = false;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -39,6 +40,9 @@ public class Gui extends JFrame {
 		add(canvas);
 		pack();
 		setVisible(true);
+		mouse = new Mouse();
+		canvas.addMouseListener(mouse);
+		canvas.addMouseMotionListener(mouse);
 		main = new Main(width, height);
 		
 	}
@@ -52,6 +56,9 @@ public class Gui extends JFrame {
 	
 	// Update All Objects
 	public void update() {
+		System.out.println("Mouse X:" + Mouse.getX());
+		System.out.println("Mouse Y:" + Mouse.getY());
+		System.out.println("Mouse Button:" + Mouse.getB());
 		main.update();
 	}
 	
