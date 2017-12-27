@@ -8,7 +8,7 @@ public class Board {
 	private int height;
 	private int width;
 	private Sprite sprite;
-	public Piece piece;
+	List<Piece> pieces = new ArrayList<Piece>();
 	List<Location> highlights = new ArrayList<Location>();
 	
 	/*
@@ -40,6 +40,14 @@ public class Board {
 		System.out.println(square.getX() + "  " + square.getY() +  "  " + getWidth() + "   " + getHeight());
 		if(square.getX() < getWidth() && square.getY() < getHeight() ) {
 			highlights.add(square);
+		}
+	}
+	
+	public void placePiece(Piece piece) {
+		int x = piece.getLoc().getX();
+		int y = piece.getLoc().getX();
+		if (board[x][y]== 0) {
+			pieces.add(piece);
 		}
 	}
 	
@@ -90,6 +98,7 @@ public class Board {
 	public void render(Screen screen) {
 		screen.renderBoard(this);
 		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlight);
+		for(int i = 0; i < pieces.size(); i++) screen.renderPiece(pieces.get(i));
 	}
 	
 } 

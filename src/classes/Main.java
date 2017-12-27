@@ -23,6 +23,8 @@ public class Main {
 		
 		turn = p1;
 		mse = new Location(-1, -1);
+		board.placePiece(tp);
+		board.placePiece(jp);
 		
 		
 	}
