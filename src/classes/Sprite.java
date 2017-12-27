@@ -11,9 +11,11 @@ public class Sprite {
 	private int[] pixels;
 	private int width, height;
 	
+	//Created static Sprites to be used anywhere
 	public static Sprite checkerboard = new Sprite("res/checkerboard.png");
 	public static Sprite highlight = new Sprite("res/highlight.png");
 	
+	//Sprite filepath Constructor
 	public Sprite(String filename) {
 		path = filename;
 		load();
@@ -21,10 +23,13 @@ public class Sprite {
 	
 	private void load()  {
 		try {
+			//Load in image
 			BufferedImage image = ImageIO.read(new FileInputStream(path));
 			width = image.getWidth();
 			height = image.getHeight();
+			//Set Image Size
 			pixels = new int[width *height];
+			//Set pixels
 			image.getRGB(0, 0, width, height, pixels, 0, width);
 		}catch(IOException q) {
 			q.printStackTrace();

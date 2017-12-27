@@ -46,6 +46,7 @@ public class Board {
 	public void placePiece(Piece piece) {
 		int x = piece.getLoc().getX();
 		int y = piece.getLoc().getX();
+		//Check if the board location is full or not
 		if (board[x][y]== 0) {
 			pieces.add(piece);
 		}
@@ -96,8 +97,11 @@ public class Board {
 	}
 	
 	public void render(Screen screen) {
+		//Render Board
 		screen.renderBoard(this);
+		//Render every Highlighted Square
 		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlight);
+		//Render every Piece
 		for(int i = 0; i < pieces.size(); i++) screen.renderPiece(pieces.get(i));
 	}
 	

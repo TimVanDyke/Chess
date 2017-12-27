@@ -15,12 +15,14 @@ import javax.swing.border.EmptyBorder;
 public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
+	//Window Size
 	public static int width = 640;
 	public static int height = 640;
 	private String title = "Chess!";
 	private Canvas canvas;
 	private Mouse mouse;
 	private boolean running = false;
+	//Image Stuff for Canvas Rendering
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
@@ -40,9 +42,13 @@ public class Gui extends JFrame {
 		add(canvas);
 		pack();
 		setVisible(true);
+		
+		//Add Mouse
 		mouse = new Mouse();
 		canvas.addMouseListener(mouse);
 		canvas.addMouseMotionListener(mouse);
+		
+		//Create Main Instance
 		main = new Main(width, height);
 		
 	}
@@ -50,7 +56,9 @@ public class Gui extends JFrame {
 	// Launcher
 	public void start() {
 		running = true;
+		//Sets Game as Primary Window
 		requestFocus();
+		//Launch Game Loop
 		run();
 	}
 	
@@ -95,7 +103,9 @@ public class Gui extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		Gui frame = new Gui();
-		frame.start();
+		//Create GUI
+		Gui gui = new Gui();
+		//Start GUI
+		gui.start();
 	}
 }

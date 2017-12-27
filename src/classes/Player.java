@@ -7,14 +7,17 @@ public class Player {
 	private String name;
 	private Piece[] pieces;
 	
-	public Player(int color) {
-		pieces = new Piece[maxPieces];
-		name = "PlayerZero";
-	}
-	
 	public Player(String name) {
+		//List of pieces owned by the player
 		pieces = new Piece[maxPieces];
 		this.name  = name;
+	}
+	
+	//Alternate Constructor
+	public Player(int color) {
+		
+		pieces = new Piece[maxPieces];
+		name = "PlayerZero";
 	}
 	
 	public Piece[] getPieces() {

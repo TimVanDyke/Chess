@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 
 public class Mouse implements MouseListener, MouseMotionListener{
 	
+	
 	private static int x = -1;
 	private static int y = -1;
 	private static int b = -1;
@@ -14,11 +15,7 @@ public class Mouse implements MouseListener, MouseMotionListener{
 	public static int getY() { return y; }
 	public static int getB() { return b; }
 	
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -44,6 +41,12 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		b = -1;
 		
 	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -56,5 +59,6 @@ public class Mouse implements MouseListener, MouseMotionListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }
