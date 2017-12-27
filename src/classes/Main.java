@@ -12,7 +12,7 @@ public class Main {
 	private Player turn;
 	private Location mse;
 	private Piece tp, jp;
-	private boolean pieceChosen = false;
+	private Piece chosen = null;
 	public Main(int width, int height) {
 		//Create Screen with Window width and height
 		screen = new Screen(width, height);
@@ -41,15 +41,20 @@ public class Main {
 	}
 	
 	public void update() {
+		System.out.println(chosen);
 		//Set New Mouse Location
 		mse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
-		if (!pieceChosen) {
+		if (chosen == null) {
 			//Listen for mouse click
 			if (Mouse.getB() == 1) {
 				 board.highlight(mse);
+				 chosen = board.getPieceAt(mse);
 			}
 		} else {
-			
+			Location[] squares = chosen.getRange();
+			for(int i = 0; i < squares.length; i++) {
+				board.highlight(squares[i]);
+			}
 		}
 	}
 	

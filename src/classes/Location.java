@@ -8,6 +8,10 @@ public class Location {
 		this.y = y;
 	}
 	
+	public Location copy() {
+		return new Location(x, y);
+	}
+	
 	public int getX() {
 		return x;
 	}
