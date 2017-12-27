@@ -10,6 +10,10 @@ public class Sprite {
 	private String path;
 	private int[] pixels;
 	private int width, height;
+	
+	public static Sprite checkerboard = new Sprite("res/checkerboard.png");
+	public static Sprite highlight = new Sprite("res/highlight.png");
+	
 	public Sprite(String filename) {
 		path = filename;
 		load();

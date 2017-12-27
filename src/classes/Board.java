@@ -1,11 +1,15 @@
 package classes;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Board {
 	private int board[][]; //the board
 	private int height;
 	private int width;
 	private Sprite sprite;
 	public Piece piece;
+	List<Location> highlights = new ArrayList<Location>();
 	
 	/*
 	 * the constructor
@@ -16,7 +20,7 @@ public class Board {
 		this.height = height - 1; 
 		this.width = width - 1;
 		board = new int[width][height];
-		sprite = new Sprite("res/checkerboard.png");
+		sprite = Sprite.checkerboard;
 		for (int x = 0; x < this.width; x++) {
 			for (int y = 0; y < this.height; y ++) {
 				board[x][y] = 0;
@@ -30,6 +34,13 @@ public class Board {
 	
 	public int getWidth() {
 		return width;
+	}
+	
+	public void highlight(Location square) {
+		System.out.println(square.getX() + "  " + square.getY() +  "  " + getWidth() + "   " + getHeight());
+		if(square.getX() < getWidth() && square.getY() < getHeight() ) {
+			highlights.add(square);
+		}
 	}
 	
 	public boolean isFull(int x, int y) {
@@ -78,6 +89,7 @@ public class Board {
 	
 	public void render(Screen screen) {
 		screen.renderBoard(this);
+		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlight);
 	}
 	
 } 

@@ -56,9 +56,6 @@ public class Gui extends JFrame {
 	
 	// Update All Objects
 	public void update() {
-		System.out.println("Mouse X:" + Mouse.getX());
-		System.out.println("Mouse Y:" + Mouse.getY());
-		System.out.println("Mouse Button:" + Mouse.getB());
 		main.update();
 	}
 	

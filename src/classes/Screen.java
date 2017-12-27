@@ -35,6 +35,18 @@ public class Screen {
 		}
 	}
 	
+	public void renderSquare(Board board, Location loc, Sprite sprite) {
+		int yOffset = loc.getY() * 64;
+		int xOffset = loc.getX() * 64;
+		for(int y = 0; y < sprite.getHeight(); y++) {
+			int yp = y + yOffset;
+			for(int x = 0; x < sprite.getWidth(); x++) {
+				int xp = x + xOffset;
+				pixels[xp + yp * width] = sprite.getPixels()[x + y * sprite.getWidth()];
+			}
+		}
+	}
+	
 	public void clear() {
 		for(int i = 0; i < pixels.length; i++) pixels[i] = 0xAAAAAA;
 	}
