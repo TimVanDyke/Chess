@@ -50,7 +50,11 @@ public class Main {
 			//Listen for mouse click
 			if (Mouse.getB() == 1) {
 				chosen = board.getPieceAt(mse);
-				board.highlight(mse, "Select");
+				if(chosen != null && chosen.getOwner() == turn) {
+					board.highlight(mse, "Select");
+				} else {
+					chosen = null;
+				}
 				 
 			}
 		} else if (!movesShown){

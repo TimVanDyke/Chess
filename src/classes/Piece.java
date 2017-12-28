@@ -132,6 +132,10 @@ public class Piece {
 		return size;
 	}
 	
+	public Player getOwner() {
+		return owner;
+	}
+	
 	public void render(Screen screen) {
 		screen.renderPiece(this);
 	}
