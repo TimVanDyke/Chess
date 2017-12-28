@@ -8,8 +8,15 @@ public class Board {
 	private int height;
 	private int width;
 	private Sprite sprite;
+	/* Variable length List of pieces
+	 *	Usage: .add(new element) - Adds things to the list
+     *			  .remove(element) - Removes a particular element from the list
+	 *			  .get(index)			  - Gets the item at index
+	 *			  .clear() 				  - Empties the list
+	 */
 	List<Piece> pieces = new ArrayList<Piece>();
 	public Location mouse;
+	//List of Highlights
 	List<Location> highlights = new ArrayList<Location>();
 	
 	/*
@@ -18,8 +25,8 @@ public class Board {
 	 * @param height is the height of the board
 	 */
 	public Board(int width, int height) {
-		this.height = height - 1; 
-		this.width = width - 1;
+		this.height = height; 
+		this.width = width;
 		board = new int[width][height];
 		sprite = Sprite.checkerboard;
 		mouse = new Location(-1, -1);
@@ -121,5 +128,4 @@ public class Board {
 		//Render every Piece
 		for(int i = 0; i < pieces.size(); i++) screen.renderPiece(pieces.get(i));
 	}
-	
 } 

@@ -25,16 +25,13 @@ public class Main {
 		p1 = new Player("Tim");
 		tp = new Pawn(1, new Location(0, 1), board, p1, "res/bluePiece.png");
 		
-		
 		//Create Player Jason with his pieces
 		p2 = new Player("Jason");
 		jp = new Pawn(1, new Location(5, 5), board, p2, "res/redPiece.png");
 		
-		
 		//Place Pieces
 		board.placePiece(tp);
 		board.placePiece(jp);
-		
 		
 		//Set Turn to first Player
 		turn = p1;
@@ -43,42 +40,57 @@ public class Main {
 	}
 	
 	public void update() {
-		System.out.println(chosen);
 		//Set New Mouse Location
 		mse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
 		if (chosen == null) {
 			//Listen for mouse click
 			if (Mouse.getB() == 1) {
+				//Check for a piece at that position
 				chosen = board.getPieceAt(mse);
+				//If there is a piece and it belongs to the player whose turn it is
 				if(chosen != null && chosen.getOwner() == turn) {
+					//Highlight the piece in Gold coloring
 					board.highlight(mse, "Select");
 				} else {
+					//If the piece is an opponents piece, don't highlight
 					chosen = null;
 				}
-				 
 			}
+			//If moves haven't been highlighted yet
 		} else if (!movesShown){
+			//Get range of selected piece
 			squares = chosen.getRange();
+			//Highlight all available spaces in Blue coloring
 			for(int i = 0; i < squares.length; i++) {
-				board.highlight(squares[i], "Move");
+				if (chosen.legalMove(squares[i])) {
+					board.highlight(squares[i], "Move");
+				}
 			}
+			//Move on to next part
 			movesShown = true;
 		} else {
+			//Listen for the mouse click
 			if (Mouse.getB() == 1) {
+				//Check if any of the available spaces have been clicked
 				for (int i = 0; i < squares.length; i++) {
 					if(mse.equals(squares[i])) {
+						//Move piece
 						chosen.setLoc(mse.getX(), mse.getY());
 						movesShown = false;
 						chosen = null;
+						//End the Turn
 						switchTurn();
 					}
 				}
+				//If the player clicks away from the spaces,
+				//Allow the player to choose a different piece
 				if (chosen != null && !mse.equals(chosen.getLoc())) {
 					movesShown = false;
 					chosen = null;
 				}
 			}
 		}
+		//Reset Highlighting
 		if (chosen == null) {
 			board.highlights.clear();
 			board.mouse.setLoc(-1, -1);
@@ -88,7 +100,6 @@ public class Main {
 	public void render(int[] pixels) {
 		//Render Checkerboard
 		board.render(screen);
-		
 		
 		//Render the new pixels from Screen to the GUI pixels
 		//This must be last
