@@ -14,6 +14,7 @@ public class Sprite {
 	//Created static Sprites to be used anywhere
 	public static Sprite checkerboard = new Sprite("res/checkerboard.png");
 	public static Sprite highlight = new Sprite("res/highlight.png");
+	public static Sprite highlightMove = new Sprite("res/highlight_move.png");
 	
 	//Sprite filepath Constructor
 	public Sprite(String filename) {

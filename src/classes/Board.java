@@ -9,7 +9,7 @@ public class Board {
 	private int width;
 	private Sprite sprite;
 	List<Piece> pieces = new ArrayList<Piece>();
-	private Location mouse;
+	public Location mouse;
 	List<Location> highlights = new ArrayList<Location>();
 	
 	/*
@@ -38,9 +38,13 @@ public class Board {
 		return width;
 	}
 	
-	public void highlight(Location square) {
-		if(square.getX() <= getWidth() && square.getY() <= getHeight() ) {
-			mouse = square.copy();
+	public void highlight(Location square, String type) {
+		if (type.equals( "Move")) {
+			highlights.add(square.copy());
+		}else {
+			if(square.getX() <= getWidth() && square.getY() <= getHeight() ) {
+				mouse = square.copy();
+			}
 		}
 	}
 	
@@ -48,7 +52,7 @@ public class Board {
 		int x = piece.getLoc().getX();
 		int y = piece.getLoc().getX();
 		//Check if the board location is full or not
-		if (board[x][y]== 0) {
+		if (!isFull(piece.getLoc())) {
 			pieces.add(piece);
 		}
 	}
@@ -113,7 +117,7 @@ public class Board {
 		//Render Square Highlighted by the Mouse
 		if (mouse.getX() >= 0 && mouse.getY() >= 0) screen.renderSquare(this, mouse, Sprite.highlight);
 		//Render every Highlighted Square
-		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlight);
+		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlightMove);
 		//Render every Piece
 		for(int i = 0; i < pieces.size(); i++) screen.renderPiece(pieces.get(i));
 	}
