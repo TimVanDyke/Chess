@@ -7,6 +7,7 @@ public class Board {
 	private int board[][]; //the board
 	private int height;
 	private int width;
+	private Player p1, p2;
 	private Sprite sprite;
 	/* Variable length List of pieces
 	 *	Usage: .add(new element) - Adds things to the list
@@ -25,9 +26,11 @@ public class Board {
 	 * @param width is the width of the board
 	 * @param height is the height of the board
 	 */
-	public Board(int width, int height) {
+	public Board(int width, int height, Player p1, Player p2) {
 		this.height = height; 
 		this.width = width;
+		this.p1 = p1;
+		this.p2 = p2;
 		board = new int[width][height];
 		sprite = Sprite.checkerboard;
 		mouse = new Location(-1, -1);
@@ -77,6 +80,9 @@ public class Board {
 	
 	public void capture(Piece piece) {
 		pieces.remove(piece);
+		int x = getWidth();
+		if(piece.getOwner() == p1) x++;
+		piece.setLoc(x, captures.size());
 		captures.add(piece);
 	}
 	
@@ -131,7 +137,9 @@ public class Board {
 		if (mouse.getX() >= 0 && mouse.getY() >= 0) screen.renderSquare(this, mouse, Sprite.highlight);
 		//Render every Highlighted Square
 		for(int i = 0; i < highlights.size(); i++) screen.renderSquare(this, highlights.get(i), Sprite.highlightMove);
-		//Render every Piece
+		//Render every Piece on board
 		for(int i = 0; i < pieces.size(); i++) screen.renderPiece(pieces.get(i));
+		//Render captured Pieces
+		for(int i = 0; i < captures.size(); i++) screen.renderPiece(captures.get(i));
 	}
 } 

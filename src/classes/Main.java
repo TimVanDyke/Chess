@@ -19,7 +19,7 @@ public class Main {
 		//Create Screen with Window width and height
 		screen = new Screen(width, height);
 		//Create 8x8 Board
-		board = new Board(size, size);
+		board = new Board(size, size, p1, p2);
 		
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
@@ -44,6 +44,7 @@ public class Main {
 	public void update() {
 		//Set New Mouse Location
 		mse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
+		if(Mouse.getB() == 4) System.exit(0);
 		if (chosen == null) {
 			//Listen for mouse click
 			if (Mouse.getB() == 1) {

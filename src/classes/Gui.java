@@ -1,18 +1,18 @@
 package classes;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-public class Gui extends JFrame {
+public class Gui extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	//Window Size
@@ -31,7 +31,7 @@ public class Gui extends JFrame {
 	public Gui() {
 		//Create Window (JFrame)
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(null);		
@@ -40,6 +40,7 @@ public class Gui extends JFrame {
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		add(canvas);
+		JButton quit = new JButton("Quit");
 		pack();
 		setVisible(true);
 		
@@ -47,6 +48,13 @@ public class Gui extends JFrame {
 		mouse = new Mouse();
 		canvas.addMouseListener(mouse);
 		canvas.addMouseMotionListener(mouse);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	System.out.println("Close!");
+		    	stop();
+		    }
+		});
 		
 		//Create Main Instance
 		main = new Main(width, height);
@@ -60,6 +68,11 @@ public class Gui extends JFrame {
 		requestFocus();
 		//Launch Game Loop
 		run();
+	}
+	
+	public void stop() {
+		running = false;
+		System.exit(0);
 	}
 	
 	// Update All Objects
@@ -103,9 +116,7 @@ public class Gui extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		//Create GUI
 		Gui gui = new Gui();
-		//Start GUI
 		gui.start();
 	}
 }
