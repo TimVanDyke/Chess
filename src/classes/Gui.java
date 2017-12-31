@@ -99,7 +99,7 @@ public class Gui extends JFrame{
 		// Draw Graphics
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		g.drawString(main.getTurn().getName(), 32, 600);
+		g.drawString(main.getTurn().getName(), 50, 600);
 		
 		// Dispose Graphics
 		g.dispose();
