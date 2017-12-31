@@ -19,7 +19,7 @@ public class Main {
 		//Create Screen with Window width and height
 		screen = new Screen(width, height);
 		//Create 8x8 Board
-		board = new Board(size, size);
+		board = new Board(size, size, p1, p2);
 		
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
