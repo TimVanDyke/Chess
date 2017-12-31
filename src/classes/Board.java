@@ -15,6 +15,7 @@ public class Board {
 	 *			  .clear() 				  - Empties the list
 	 */
 	List<Piece> pieces = new ArrayList<Piece>();
+	List<Piece> captures = new ArrayList<Piece>();
 	public Location mouse;
 	//List of Highlights
 	List<Location> highlights = new ArrayList<Location>();
@@ -73,6 +74,11 @@ public class Board {
 		}
 		return null;
 	 }
+	
+	public void capture(Piece piece) {
+		pieces.remove(piece);
+		captures.add(piece);
+	}
 	
 	public boolean isFull(int x, int y) {
 		boolean isFull;

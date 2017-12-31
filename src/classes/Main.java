@@ -24,10 +24,12 @@ public class Main {
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
 		tp = new Pawn(1, new Location(0, 1), board, p1, "res/bluePiece.png");
+		board.placePiece(new Pawn(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
 		
 		//Create Player Jason with his pieces
 		p2 = new Player("Jason");
 		jp = new Pawn(1, new Location(5, 5), board, p2, "res/redPiece.png");
+		board.placePiece(new Pawn(1, new Location(4, 3), board, p2, "res/redPiece.png"));
 		
 		//Place Pieces
 		board.placePiece(tp);
@@ -74,8 +76,12 @@ public class Main {
 				//Check if any of the available spaces have been clicked
 				for (int i = 0; i < squares.length; i++) {
 					if(mse.equals(squares[i])) {
+						//If an enemy piece was captured, take care of it
+						Piece capture = board.getPieceAt(mse);
+						if (capture != null && capture.getOwner() != turn) board.capture(capture);
 						//Move piece
 						chosen.setLoc(mse.getX(), mse.getY());
+						//Reset Highlighting
 						movesShown = false;
 						chosen = null;
 						//End the Turn
