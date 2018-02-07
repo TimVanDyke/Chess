@@ -7,7 +7,7 @@ public class Piece {
 	private Player owner;
 	private Boolean isAlive;
 	private Sprite sprite;
-	private Board board;
+	protected Board board;
 	/*
 	 * the constructor
 	 */
@@ -66,7 +66,7 @@ public class Piece {
 	 */
 	public boolean legalMove(Location newLoc) {
 		Location[] legalMoves = getRange();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < legalMoves.length; i++) {
 			if (legalMoves[i].getX() == newLoc.getX() && legalMoves[i].getY() == newLoc.getY() && newLoc.getX() >= 0 && newLoc.getY() >= 0 && newLoc.getX() < bWidth && newLoc.getY() < bHeight) {
 				return true;
 			}

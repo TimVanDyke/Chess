@@ -11,7 +11,6 @@ public class Main {
 	private Player p1, p2;
 	private Player turn;
 	private Location mse;
-	private Pawn tp, jp;
 	private Piece chosen = null;
 	private boolean movesShown = false;
 	private Location[] squares;
@@ -23,17 +22,15 @@ public class Main {
 		
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
-		tp = new Pawn(1, new Location(0, 1), board, p1, "res/bluePiece.png");
+		board.placePiece(new Rook(1, new Location(2, 1), board, p1, "res/bluePiece.png"));
+		board.placePiece(new Knight(1, new Location(0, 1), board, p1, "res/bluePiece.png"));
 		board.placePiece(new Pawn(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
 		
 		//Create Player Jason with his pieces
 		p2 = new Player("Jason");
-		jp = new Pawn(1, new Location(5, 5), board, p2, "res/redPiece.png");
+		board.placePiece(new Rook(1, new Location(3, 2), board, p2, "res/redPiece.png"));
+		board.placePiece(new Knight(1, new Location(5, 5), board, p2, "res/redPiece.png"));
 		board.placePiece(new Pawn(1, new Location(4, 3), board, p2, "res/redPiece.png"));
-		
-		//Place Pieces
-		board.placePiece(tp);
-		board.placePiece(jp);
 		
 		//Set Turn to first Player
 		turn = p1;
