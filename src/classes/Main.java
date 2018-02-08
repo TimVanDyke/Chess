@@ -76,9 +76,11 @@ public class Main {
 				//Check if any of the available spaces have been clicked
 				for (int i = 0; i < squares.length; i++) {
 					if(mse.equals(squares[i])) {
+						//If an ally piece is there, skip
+						if (board.getPieceAt(mse) != null && board.getPieceAt(mse).getOwner() == turn) continue;
 						//If an enemy piece was captured, take care of it
 						Piece capture = board.getPieceAt(mse);
-						if (capture != null && capture.getOwner() != turn) board.capture(capture);
+						if (capture != null) board.capture(capture);
 						//Move piece
 						chosen.setLoc(mse.getX(), mse.getY());
 						//Reset Highlighting
