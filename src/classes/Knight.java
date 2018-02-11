@@ -43,5 +43,17 @@ public class Knight extends Piece{
 		moves[7].setX(square.getX() - 2);
 		return moves;
 	}
+	
+	public boolean legalMove(Location newLoc) {
+		Location[] legalMoves = getRange();
+		for (int i = 0; i < legalMoves.length; i++) {
+			Piece pieceAtMove = board.getPieceAt(legalMoves[i]);
+			if (pieceAtMove != null && pieceAtMove.getOwner() == this.getOwner()) continue;
+			if (legalMoves[i].getX() == newLoc.getX() && legalMoves[i].getY() == newLoc.getY() && newLoc.getX() >= 0 && newLoc.getY() >= 0 && newLoc.getX() < bWidth && newLoc.getY() < bHeight) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

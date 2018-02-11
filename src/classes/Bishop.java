@@ -12,7 +12,6 @@ public class Bishop extends Piece{
 	
 	public Location[] getRange() {
 		List<Location> moves = new ArrayList<Location>();
-		Location[] moveArray = new Location[board.getWidth() + board.getHeight() - 2];
 		Location square = getLoc();
 		//Get Forward Diagonal Moves - \
 		for (int x = 0; x < board.getWidth(); x++) {
@@ -34,11 +33,7 @@ public class Bishop extends Piece{
 			if (newMove.equals(square)) continue;
 			moves.add(newMove);
 		}
-		//Convert moves array list into an array
-		for (int i = 0; i < moves.size(); i++) {
-			moveArray[i] = moves.get(i);
-		}
-		return moveArray;
+		return locationListToArray(moves);
 	}
 
 }

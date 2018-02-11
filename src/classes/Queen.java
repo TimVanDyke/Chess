@@ -13,7 +13,6 @@ public class Queen extends Piece{
 	public Location[] getRange() {
 		//This can be made more efficient
 		List<Location> moves = new ArrayList<Location>();
-		Location[] moveArray = new Location[board.getWidth() * 2 + board.getHeight() * 2 - 4];
 		Location square = getLoc();
 		//Get Forward Diagonal Moves - \
 		for (int x = 0; x < board.getWidth(); x++) {
@@ -51,10 +50,6 @@ public class Queen extends Piece{
 			move.setY(i);
 			moves.add(move);
 		}
-		//Convert moves array list into an array
-		for (int i = 0; i < moves.size(); i++) {
-			moveArray[i] = moves.get(i);
-		}
-		return moveArray;
+		return locationListToArray(moves);
 	}
 }

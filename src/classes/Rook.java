@@ -10,7 +10,6 @@ public class Rook extends Piece{
 	}
 	
 	public Location[] getRange() {
-		Location[] moveArray = new Location[board.getWidth() + board.getHeight() - 2];
 		List<Location> moves = new ArrayList<Location>();
 		Location square = getLoc();
 		//Get Horizontal Moves
@@ -29,10 +28,6 @@ public class Rook extends Piece{
 			move.setY(i);
 			moves.add(move);
 		}
-		//Convert moves array list into an array
-		for (int i = 0; i < moves.size(); i++) {
-			moveArray[i] = moves.get(i);
-		}
-		return moveArray;
+		return locationListToArray(moves);
 	}
 }

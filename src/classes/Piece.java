@@ -1,9 +1,16 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Piece {
 	//Class variables
 	private Location currentLoc; //the x y coordinates of a piece
-	private int move, bWidth, bHeight, size, color; //all the ints
+	private int move; //all the ints
+	protected int bWidth;
+	protected int bHeight;
+	private int size;
+	private int color;
 	private Player owner;
 	private Boolean isAlive;
 	private Sprite sprite;
@@ -88,6 +95,15 @@ public class Piece {
 			}
 		}
 		return false;
+	}
+	
+	public Location[] locationListToArray(List<Location> moves) {
+		Location[] moveArray = new Location[moves.size()];
+		//Convert moves array list into an array
+		for (int i = 0; i < moves.size(); i++) {
+			moveArray[i] = moves.get(i);
+		}
+		return moveArray;
 	}
 	
 	/*
