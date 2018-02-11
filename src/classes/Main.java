@@ -22,17 +22,21 @@ public class Main {
 		
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
+		board.placePiece(new King(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
+		board.placePiece(new Queen(1, new Location(4, 0), board, p1, "res/bluePiece.png"));
 		board.placePiece(new Bishop(1, new Location(2, 0), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Rook(1, new Location(2, 1), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Knight(1, new Location(0, 1), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Pawn(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
+		board.placePiece(new Rook(1, new Location(5, 0), board, p1, "res/bluePiece.png"));
+		board.placePiece(new Knight(1, new Location(6, 0), board, p1, "res/bluePiece.png"));
+		board.placePiece(new Pawn(1, new Location(1, 0), board, p1, "res/bluePiece.png"));
 		
 		//Create Player Jason with his pieces
 		p2 = new Player("Jason");
-		board.placePiece(new Bishop(1, new Location(4, 4), board, p2, "res/redPiece.png"));
-		board.placePiece(new Rook(1, new Location(3, 2), board, p2, "res/redPiece.png"));
-		board.placePiece(new Knight(1, new Location(5, 5), board, p2, "res/redPiece.png"));
-		board.placePiece(new Pawn(1, new Location(4, 3), board, p2, "res/redPiece.png"));
+		board.placePiece(new King(1, new Location(3, 7), board, p2, "res/redPiece.png"));
+		board.placePiece(new Queen(1, new Location(4, 7), board, p2, "res/redPiece.png"));
+		board.placePiece(new Bishop(1, new Location(2, 7), board, p2, "res/redPiece.png"));
+		board.placePiece(new Rook(1, new Location(5, 7), board, p2, "res/redPiece.png"));
+		board.placePiece(new Knight(1, new Location(6, 7), board, p2, "res/redPiece.png"));
+		board.placePiece(new Pawn(1, new Location(1, 7), board, p2, "res/redPiece.png"));
 		
 		//Set Turn to first Player
 		turn = p1;
