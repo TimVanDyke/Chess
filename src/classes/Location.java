@@ -49,4 +49,12 @@ public class Location {
 		else
 			return false;
 	}
+	
+	public int distanceToX(Location loc) {
+		return loc.getX() - x;
+	}
+	
+	public int distanceToY(Location loc) {
+		return loc.getY() - y;
+	}
 }

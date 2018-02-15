@@ -30,4 +30,32 @@ public class Rook extends Piece{
 		}
 		return locationListToArray(moves);
 	}
+	
+	public boolean isClearPath(Location move) {
+		return isClearPathStraight(move);
+	}
+	
+	public boolean isClearPathStraight(Location move) {
+		int xdist = currentLoc.distanceToX(move);
+		int ydist = currentLoc.distanceToY(move);
+		int sign = -1;
+		if (ydist == 0) {
+			if (xdist < 0) sign = 1;
+			for (int x = xdist + sign; x != 0; x += sign) {
+				Location next = move.copy();
+				next.setX(currentLoc.getX() + x);
+				if (board.getPieceAt(next) != null) return false;
+			}
+			return true;
+		} else if(xdist == 0) {
+			if (ydist < 0) sign = 1;
+			for (int y = ydist + sign; y != 0; y += sign) {
+				Location next = move.copy();
+				next.setY(currentLoc.getY() + y);
+				if (board.getPieceAt(next) != null) return false;
+			}
+			return true;
+		}
+		return false;
+	}
 }

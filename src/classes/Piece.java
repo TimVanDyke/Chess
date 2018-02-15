@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Piece {
 	//Class variables
-	private Location currentLoc; //the x y coordinates of a piece
+	protected Location currentLoc; //the x y coordinates of a piece
 	private int move; //all the ints
 	protected int bWidth;
 	protected int bHeight;
@@ -72,15 +72,23 @@ public class Piece {
 	 * @param newLoc is the new location
 	 */
 	public boolean legalMove(Location newLoc) {
+		boolean legal = false;
 		Location[] legalMoves = getRange();
 		for (int i = 0; i < legalMoves.length; i++) {
 			Piece pieceAtMove = board.getPieceAt(legalMoves[i]);
 			if (pieceAtMove != null && pieceAtMove.getOwner() == this.getOwner()) continue;
 			if (legalMoves[i].getX() == newLoc.getX() && legalMoves[i].getY() == newLoc.getY() && newLoc.getX() >= 0 && newLoc.getY() >= 0 && newLoc.getX() < bWidth && newLoc.getY() < bHeight) {
-				return true;
+				if (isClearPath(legalMoves[i])) { 
+					legal = true;
+				}
 			}
 		}
-		return false;
+		return legal;
+	}
+	
+	public boolean isClearPath(Location move) {
+		// Impletement this method in subclasses - Template Pattern
+		return true;
 	}
 	/*
 	 * Changes the pieces current location to a new location

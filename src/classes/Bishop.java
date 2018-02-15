@@ -35,5 +35,17 @@ public class Bishop extends Piece{
 		}
 		return locationListToArray(moves);
 	}
+	
+	public boolean isClearPath(Location move) {
+		return isClearPathDiagonally(move);
+	}
+	
+	public boolean isClearPathDiagonally(Location move) {
+		//I'm stuck, look at the rook's code for reference
+		int xdist = currentLoc.distanceToX(move);
+		int ydist = currentLoc.distanceToY(move);
+		int sign = -1;
+		return true;
+	}
 
 }
