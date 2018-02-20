@@ -44,7 +44,20 @@ public class Bishop extends Piece{
 		//I'm stuck, look at the rook's code for reference
 		int xdist = currentLoc.distanceToX(move);
 		int ydist = currentLoc.distanceToY(move);
-		int sign = -1;
+		int signx = 1, signy = 1;
+		if (xdist < 0) signx = -1;
+		if (ydist < 0) signy = -1;
+		System.out.println(currentLoc + " ==" + move);
+		Location start = move.copy();
+		start.setX(start.getX() - signx);
+		start.setY(start.getY() - signy);
+		for (Location next = start; !next.equals(currentLoc); next.setX(next.getX() - signx), next.setY(next.getY() - signy)) {
+			System.out.println("Checking Location " + next.toString());
+			Piece piece = board.getPieceAt(next);
+			if (piece != null) {
+				return false;
+			}
+		}
 		return true;
 	}
 

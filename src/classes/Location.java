@@ -50,6 +50,10 @@ public class Location {
 			return false;
 	}
 	
+	public String toString() {
+		return "- " + getX() + " | " + getY() + " -";
+	}
+	
 	public int distanceToX(Location loc) {
 		return loc.getX() - x;
 	}
