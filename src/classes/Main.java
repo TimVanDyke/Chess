@@ -45,68 +45,102 @@ public class Main {
 	}
 	
 	public void update() {
+		handlePieces();
+	}
+	
+	public void handlePieces() {
 		//Set New Mouse Location
 		mse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
 		if(Mouse.getB() == 4) System.exit(0);
 		if (chosen == null) {
-			//Listen for mouse click
-			if (Mouse.getB() == 1) {
-				//Check for a piece at that position
-				chosen = board.getPieceAt(mse);
-				//If there is a piece and it belongs to the player whose turn it is
-				if(chosen != null && chosen.getOwner() == turn) {
-					//Highlight the piece in Gold coloring
-					board.highlight(mse, "Select");
-				} else {
-					//If the piece is an opponents piece, don't highlight
-					chosen = null;
-				}
-			}
-			//If moves haven't been highlighted yet
+			selectPiece();
 		} else if (!movesShown){
-			//Get range of selected piece
-			squares = chosen.getRange();
-			//Highlight all available spaces in Blue coloring
-			for(int i = 0; i < squares.length; i++) {
-				if (chosen.legalMove(squares[i])) {
-					board.highlight(squares[i], "Move");
-				}
-			}
-			//Move on to next part
-			movesShown = true;
+			showMoves();
 		} else {
 			//Listen for the mouse click
 			if (Mouse.getB() == 1) {
-				//Check if any of the available spaces have been clicked
-				for (int i = 0; i < squares.length; i++) {
-					if(mse.equals(squares[i])) {
-						//If an ally piece is there, skip
-						if (board.getPieceAt(mse) != null && board.getPieceAt(mse).getOwner() == turn) continue;
-						//If an enemy piece was captured, take care of it
-						Piece capture = board.getPieceAt(mse);
-						if (capture != null) board.capture(capture);
-						//Move piece
-						chosen.setLoc(mse.getX(), mse.getY());
-						//Reset Highlighting
-						movesShown = false;
-						chosen = null;
-						//End the Turn
-						switchTurn();
-					}
-				}
-				//If the player clicks away from the spaces,
-				//Allow the player to choose a different piece
-				if (chosen != null && !mse.equals(chosen.getLoc())) {
-					movesShown = false;
-					chosen = null;
-				}
+				makeMove();
+				deselectPiece();
 			}
 		}
+		resetHighlights();
+	}
+	
+	public void makeMove() {
+		//Check if any of the available spaces have been clicked
+		for (int i = 0; i < squares.length; i++) {
+			if(mse.equals(squares[i])) {
+				//If an ally piece is there, skip
+				if (isAlly(mse, turn)) continue;
+				// Move into new space
+				moveToSpace();
+				//End the Turn
+				switchTurn();
+			}
+		}
+	}
+	
+	public void moveToSpace() {
+		//If an enemy piece was captured, take care of it
+		Piece capture = board.getPieceAt(mse);
+		if (capture != null) board.capture(capture);
+		//Move piece
+		chosen.setLoc(mse.getX(), mse.getY());
 		//Reset Highlighting
+		movesShown = false;
+		chosen = null;
+	}
+	
+	public void resetHighlights() {
 		if (chosen == null) {
 			board.highlights.clear();
 			board.mouse.setLoc(-1, -1);
 		}
+	}
+	
+	public void selectPiece() {
+		//Listen for mouse click
+		if (Mouse.getB() == 1) {
+			//Check for a piece at that position
+			chosen = board.getPieceAt(mse);
+			//If there is a piece and it belongs to the player whose turn it is
+			if(chosen != null && chosen.getOwner() == turn) {
+				//Highlight the piece in Gold coloring
+				board.highlight(mse, "Select");
+			} else {
+				//If the piece is an opponents piece, don't highlight
+				chosen = null;
+			}
+		}
+	}
+	
+	public void deselectPiece() {
+		//If the player clicks away from the spaces,
+		//Allow the player to choose a different piece
+		if (chosen != null && !mse.equals(chosen.getLoc())) {
+			movesShown = false;
+			chosen = null;
+		}
+	}
+	
+	public void showMoves() {
+		//Get range of selected piece
+		squares = chosen.getRange();
+		//Highlight all available spaces in Blue coloring
+		for(int i = 0; i < squares.length; i++) {
+			if (chosen.legalMove(squares[i])) {
+				board.highlight(squares[i], "Move");
+			}
+		}
+		//Move on to next part
+		movesShown = true;
+	}
+	
+	public boolean isAlly(Location square, Player player) {
+		boolean pieceExists = board.getPieceAt(square) != null;
+		if (!pieceExists) return false;
+		boolean pieceIsAlly = board.getPieceAt(square).getOwner() == player;
+		return pieceExists && pieceIsAlly;
 	}
 	
 	public void render(int[] pixels) {
