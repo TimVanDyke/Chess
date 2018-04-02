@@ -24,6 +24,25 @@ public class Player {
 		return pieces;
 	}
 	
+	public void addPiece(Piece piece) {
+		for (int i = 0; i < pieces.length; i++) {
+			if (pieces[i] == null) {
+				pieces[i] = piece;
+			}
+		}
+		System.out.println("There is a maximum of 16 pieces per player.");
+	}
+	
+	public boolean hasPieces() {
+		//Check if the player has any pieces still on the board
+		for (int i = 0; i < pieces.length; i++) {
+			if (pieces[i] != null) {
+				if (pieces[i].isAlive()) return true;
+			}
+		}
+		return false;
+	}
+	
 	public void setColor(int color) {
 		//Set color to either 0x0 (Black) or 0xFFFFFF (White)
 		this.color = color;

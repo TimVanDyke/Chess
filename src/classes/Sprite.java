@@ -15,6 +15,7 @@ public class Sprite {
 	public static Sprite checkerboard = new Sprite("res/checkerboard.png");
 	public static Sprite highlight = new Sprite("res/highlight.png");
 	public static Sprite highlightMove = new Sprite("res/highlight_move.png");
+	public static Sprite gameOver = new Sprite("res/messagebox.png");
 	
 	//Sprite filepath Constructor
 	public Sprite(String filename) {

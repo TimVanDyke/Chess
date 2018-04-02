@@ -3,12 +3,17 @@ package classes;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Gui extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -18,6 +23,12 @@ public class Gui extends JFrame{
 	public static int height = 640;
 	private String title = "Chess!";
 	private Canvas canvas;
+	
+	//Menu Variables
+	private JMenuBar menuBar;
+	private JMenu file;
+	private JMenuItem newGame, exit;
+	
 	private Mouse mouse;
 	private boolean running = false;
 	//Image Stuff for Canvas Rendering
@@ -42,6 +53,32 @@ public class Gui extends JFrame{
 		pack();
 		setVisible(true);
 		
+		//Create the Menu Bar
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		//Create the File Menu
+		file = new JMenu("File");
+		newGame = new JMenuItem("New Game");
+		newGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				main = new Main(width, height);
+			}
+		});
+		
+		exit = new JMenuItem("Exit");
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		menuBar.add(file);
+		file.add(newGame);
+		file.add(exit);
+
+		//Add All Menus to Bar
+		menuBar.add(file);
+		
 		//Add Mouse
 		mouse = new Mouse();
 		canvas.addMouseListener(mouse);
@@ -49,7 +86,6 @@ public class Gui extends JFrame{
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		    	System.out.println("Close!");
 		    	stop();
 		    }
 		});

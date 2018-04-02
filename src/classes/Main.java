@@ -3,7 +3,7 @@ package classes;
 public class Main {
 	
 	// Window Size Variables from GUI
-	private int width, height;
+	
 	//Number of Squares per side of Board
 	private int size = 8;
 	private Board board;
@@ -14,6 +14,8 @@ public class Main {
 	private Piece chosen = null;
 	private boolean movesShown = false;
 	private Location[] squares;
+	private boolean gameOver = false;
+	
 	public Main(int width, int height) {
 		//Create Screen with Window width and height
 		screen = new Screen(width, height);
@@ -22,21 +24,21 @@ public class Main {
 		
 		//Create Player Tim with his pieces
 		p1 = new Player("Tim");
-		board.placePiece(new King(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
+		//board.placePiece(new King(1, new Location(3, 0), board, p1, "res/bluePiece.png"));
 		board.placePiece(new Queen(1, new Location(4, 0), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Bishop(1, new Location(2, 0), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Rook(1, new Location(5, 0), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Knight(1, new Location(6, 0), board, p1, "res/bluePiece.png"));
-		board.placePiece(new Pawn(1, new Location(1, 0), board, p1, "res/bluePiece.png"));
+		//board.placePiece(new Bishop(1, new Location(2, 0), board, p1, "res/bluePiece.png"));
+		//board.placePiece(new Rook(1, new Location(5, 0), board, p1, "res/bluePiece.png"));
+		//board.placePiece(new Knight(1, new Location(6, 0), board, p1, "res/bluePiece.png"));
+		//board.placePiece(new Pawn(1, new Location(1, 0), board, p1, "res/bluePiece.png"));
 		
 		//Create Player Jason with his pieces
 		p2 = new Player("Jason");
-		board.placePiece(new King(1, new Location(3, 7), board, p2, "res/redPiece.png"));
+		//board.placePiece(new King(1, new Location(3, 7), board, p2, "res/redPiece.png"));
 		board.placePiece(new Queen(1, new Location(4, 7), board, p2, "res/redPiece.png"));
-		board.placePiece(new Bishop(1, new Location(2, 7), board, p2, "res/redPiece.png"));
-		board.placePiece(new Rook(1, new Location(5, 7), board, p2, "res/redPiece.png"));
-		board.placePiece(new Knight(1, new Location(6, 7), board, p2, "res/redPiece.png"));
-		board.placePiece(new Pawn(1, new Location(1, 7), board, p2, "res/redPiece.png"));
+//		board.placePiece(new Bishop(1, new Location(2, 7), board, p2, "res/redPiece.png"));
+//		board.placePiece(new Rook(1, new Location(5, 7), board, p2, "res/redPiece.png"));
+//		board.placePiece(new Knight(1, new Location(6, 7), board, p2, "res/redPiece.png"));
+//		board.placePiece(new Pawn(1, new Location(1, 7), board, p2, "res/redPiece.png"));
 		
 		//Set Turn to first Player
 		turn = p1;
@@ -45,25 +47,44 @@ public class Main {
 	}
 	
 	public void update() {
-		handlePieces();
+		if(Mouse.getB() == 4) System.exit(0);
+		if (!gameOver) {
+			checkIfGameOver();
+			handlePieces();
+		}
+	}
+	
+	public void checkIfGameOver() {
+		if (!getTurn().hasPieces()) {
+			System.out.println("Game Over!");
+			switchTurn();
+			System.out.println(turn.getName() + " Wins!");
+			gameOver = true;
+		}
 	}
 	
 	public void handlePieces() {
 		//Set New Mouse Location
 		mse.setLoc(Mouse.getX()/64, Mouse.getY()/64);
-		if(Mouse.getB() == 4) System.exit(0);
+		executeUserActions();
+		resetHighlights();
+	}
+	
+	public void executeUserActions() {
 		if (chosen == null) {
 			selectPiece();
 		} else if (!movesShown){
 			showMoves();
 		} else {
-			//Listen for the mouse click
-			if (Mouse.getB() == 1) {
-				makeMove();
-				deselectPiece();
-			}
+			waitForClick();
 		}
-		resetHighlights();
+	}
+	
+	public void waitForClick() {
+		if (Mouse.getB() == 1) {
+			makeMove();
+			deselectPiece();
+		}
 	}
 	
 	public void makeMove() {
@@ -146,12 +167,13 @@ public class Main {
 	public void render(int[] pixels) {
 		//Render Checkerboard
 		board.render(screen);
-		
+		if (gameOver) displayEndScreen();
 		//Render the new pixels from Screen to the GUI pixels
 		//This must be last
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.getPixels()[i];
 		}
+		
 	}
 	
 	public Player getTurn() {
@@ -160,5 +182,10 @@ public class Main {
 	
 	public void switchTurn() {
 		if(turn == p1) turn = p2; else turn = p1;
+	}
+	
+	public void displayEndScreen() {
+		System.out.println("" + screen.getWidth()/2 + " | " + screen.getHeight()/2);
+		screen.renderSpriteCentered(Sprite.gameOver, screen.getWidth()/2, screen.getHeight()/2);
 	}
 }

@@ -1,6 +1,5 @@
 package classes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Piece {
@@ -12,7 +11,7 @@ public class Piece {
 	private int size;
 	private int color;
 	private Player owner;
-	private Boolean isAlive;
+	private Boolean alive;
 	private Sprite sprite;
 	protected Board board;
 	/*
@@ -25,8 +24,9 @@ public class Piece {
 		bWidth = board.getWidth();
 		bHeight = board.getHeight();
 		this.owner = owner;
+		owner.addPiece(this);
 		color = owner.getColor();
-		isAlive = true;
+		alive = true;
 		sprite = new Sprite(path);
 		size = 48;
 	}
@@ -146,8 +146,13 @@ public class Piece {
 	/*
 	 * tells the piece to kill itself when it dies. This is to be called by the board
 	 */
-	public void suicide() {
-		isAlive = false;
+	public void kill() {
+		System.out.println("" + owner.getName() + "'s " + this.getClass().getSimpleName() +" was captured!");
+		alive = false;
+	}
+	
+	public boolean isAlive() {
+		return alive;
 	}
 	
 	public Sprite getSprite() {

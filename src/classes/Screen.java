@@ -6,7 +6,7 @@ public class Screen {
 	private int[] pixels;
 	public Screen(int width, int height){
 		this.width = width;
-		this.width = height;
+		this.height = height;
 		pixels = new int[width * height];
 		clear();
 	}
@@ -44,10 +44,28 @@ public class Screen {
 		//xp and yp cycle through the corresponding screen pixel locations
 		int yOffset = loc.getY() * 64;
 		int xOffset = loc.getX() * 64;
+		renderSprite(sprite, xOffset, yOffset);
+	}
+	
+	public void renderSprite(Sprite sprite, int xOffset, int yOffset) {
 		for(int y = 0; y < sprite.getHeight(); y++) {
 			int yp = y + yOffset;
 			for(int x = 0; x < sprite.getWidth(); x++) {
 				int xp = x + xOffset;
+				pixels[xp + yp * width] = sprite.getPixels()[x + y * sprite.getWidth()];
+			}
+		}
+	}
+	
+	public void renderSpriteCentered(Sprite sprite, int xOffset, int yOffset) {
+		int xCentered = xOffset - (sprite.getWidth()/2);
+		int yCentered = yOffset - (sprite.getHeight()/2);
+		for(int y = 0; y < sprite.getHeight(); y++) {
+			int yp = y + yCentered;
+			if (yp < 0 || yp > height) continue;
+			for(int x = 0; x < sprite.getWidth(); x++) {
+				int xp = x + xCentered;
+				if (xp < 0 || xp > width) continue;
 				pixels[xp + yp * width] = sprite.getPixels()[x + y * sprite.getWidth()];
 			}
 		}
@@ -60,5 +78,13 @@ public class Screen {
 	
 	public int[] getPixels() {
 		return pixels;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 }

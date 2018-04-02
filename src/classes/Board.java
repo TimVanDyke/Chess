@@ -80,6 +80,7 @@ public class Board {
 	
 	public void capture(Piece piece) {
 		pieces.remove(piece);
+		piece.kill();
 		int x = getWidth();
 		if(piece.getOwner() == p1) x++;
 		piece.setLoc(x, captures.size());
