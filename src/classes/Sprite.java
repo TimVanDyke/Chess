@@ -3,10 +3,12 @@ package classes;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 public class Sprite {
 	
+	private final int SIZE = 48;
 	private String path;
 	private int[] pixels;
 	private int width, height;
@@ -21,6 +23,14 @@ public class Sprite {
 	public Sprite(String filename) {
 		path = filename;
 		load();
+	}
+	
+	public Sprite(int color) {
+		this.width = this.height = SIZE;
+		pixels = new int[SIZE * SIZE];
+		for(int i = 0; i < SIZE*SIZE; i++) {
+			pixels[i] = color;
+		}
 	}
 	
 	private void load()  {

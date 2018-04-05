@@ -1,5 +1,7 @@
 package classes;
 
+import java.awt.Color;
+
 public class Player {
 	
 	private int color;
@@ -15,7 +17,7 @@ public class Player {
 	
 	//Alternate Constructor
 	public Player(int color) {
-		
+		this.color = color;
 		pieces = new Piece[maxPieces];
 		name = "PlayerZero";
 	}
@@ -43,14 +45,20 @@ public class Player {
 		return false;
 	}
 	
-	public void setColor(int color) {
-		//Set color to either 0x0 (Black) or 0xFFFFFF (White)
-		this.color = color;
-	}
-	
 	public int getColor() {
 		return color;
 	}
+	
+	public void setColor(int color) {
+		this.color = color;
+		updatePieces();
+	}
+	
+	public void updatePieces() {
+		for (int i = 0; i < pieces.length; i++) {
+			pieces[i].setColor(color);
+		}
+	}	
 	
 	public void setName(String name) {
 		this.name = name;

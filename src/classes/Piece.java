@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.Color;
 import java.util.List;
 
 public class Piece {
@@ -28,6 +29,20 @@ public class Piece {
 		color = owner.getColor();
 		alive = true;
 		sprite = new Sprite(path);
+		size = 48;
+	}
+	
+	public Piece(int move, Location loc, Board board, Player owner, int color) {	
+		this.move = move;
+		currentLoc = loc;
+		this.board = board;
+		bWidth = board.getWidth();
+		bHeight = board.getHeight();
+		this.owner = owner;
+		owner.addPiece(this);
+		color = owner.getColor();
+		alive = true;
+		sprite = new Sprite(color);
 		size = 48;
 	}
 	
@@ -165,6 +180,11 @@ public class Piece {
 	
 	public Player getOwner() {
 		return owner;
+	}
+	
+	public void setColor(int color) {
+		this.color = color;
+		this.sprite = new Sprite(color);
 	}
 	
 	public void render(Screen screen) {

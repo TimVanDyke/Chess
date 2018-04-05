@@ -1,5 +1,7 @@
 package classes;
 
+import java.awt.Color;
+
 public class Main {
 	
 	// Window Size Variables from GUI
@@ -187,5 +189,13 @@ public class Main {
 	public void displayEndScreen() {
 		System.out.println("" + screen.getWidth()/2 + " | " + screen.getHeight()/2);
 		screen.renderSpriteCentered(Sprite.gameOver, screen.getWidth()/2, screen.getHeight()/2);
+	}
+	//Accessed by Gui by JColorChooser
+	public void setPlayerOneColor(int hexInt) {
+		p1.setColor(hexInt);
+	}
+	
+	public void setPlayerTwoColor(int hexInt) {
+		p2.setColor(hexInt);
 	}
 }

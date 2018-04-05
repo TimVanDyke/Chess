@@ -1,6 +1,8 @@
 package classes;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,10 +27,14 @@ public class Gui extends JFrame{
 	private String title = "Chess!";
 	private Canvas canvas;
 	
+	//Pop-Up Windows
+	public JFrame colorWindow;
+	
 	//Menu Variables
 	private JMenuBar menuBar;
-	private JMenu file;
+	private JMenu file, edit;
 	private JMenuItem newGame, exit;
+	private JMenuItem changeColors;
 	
 	private Mouse mouse;
 	private boolean running = false;
@@ -49,9 +56,35 @@ public class Gui extends JFrame{
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		add(canvas);
-		JButton quit = new JButton("Quit");
 		pack();
-		setVisible(true);
+		
+		//Create Pop-Up Windows
+		
+		//Create changeColors Pop-Up
+		colorWindow = setUpWindow(400, 400, "Color Swap");
+		JButton colorP1 = new JButton("Choose a color for Player 1...");
+		colorP1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color newColor = JColorChooser.showDialog(colorWindow, "Choose a color", Color.RED);
+				String hex = String.format("0x%06x", newColor.getRGB() & 0x00FFFFFF);
+				int hexInt = Integer.decode(hex);
+				System.out.println(hexInt);
+				main.setPlayerOneColor(hexInt);
+			}
+		});
+		
+		JButton colorP2 = new JButton("Choose a color for Player 2...");
+		colorP2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color newColor = JColorChooser.showDialog(colorWindow, "Choose a color", Color.RED);
+				String hex = String.format("0x%06x", newColor.getRGB() & 0x00FFFFFF);
+				int hexInt = Integer.decode(hex);
+				System.out.println(hexInt);
+				main.setPlayerTwoColor(hexInt);
+			}
+		});
+		colorWindow.add(colorP1, BorderLayout.PAGE_START);
+		colorWindow.add(colorP2, BorderLayout.PAGE_END);
 		
 		//Create the Menu Bar
 		menuBar = new JMenuBar();
@@ -66,18 +99,33 @@ public class Gui extends JFrame{
 			}
 		});
 		
+		//Create the Edit Menu
+		edit = new JMenu("Edit");
+		changeColors = new JMenuItem("Change colors");
+		changeColors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				colorWindow.setVisible(true);
+				colorWindow.requestFocus();
+			}
+		});
+		
 		exit = new JMenuItem("Exit");
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		menuBar.add(file);
+		
+		//Populate File Menu
 		file.add(newGame);
 		file.add(exit);
-
+		
+		//Populate Edit Menu
+		edit.add(changeColors);
+		
 		//Add All Menus to Bar
 		menuBar.add(file);
+		menuBar.add(edit);
 		
 		//Add Mouse
 		mouse = new Mouse();
@@ -89,6 +137,8 @@ public class Gui extends JFrame{
 		    	stop();
 		    }
 		});
+		
+		setVisible(true);
 		
 		//Create Main Instance
 		main = new Main(width, height);
@@ -152,5 +202,15 @@ public class Gui extends JFrame{
 	public static void main(String[] args) {
 		Gui gui = new Gui();
 		gui.start();
+	}
+	
+	private JFrame setUpWindow(int width, int height, String title) {
+		JFrame frame = new JFrame(title);
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setTitle(title);
+		frame.setSize(width, height);
+		frame.setLocationRelativeTo(null);
+		return frame;
 	}
 }
